@@ -11,10 +11,10 @@
 		F0F104BC28D3752C003F5374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F104BB28D3752C003F5374 /* SceneDelegate.swift */; };
 		F0F104BE28D3752C003F5374 /* DoDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */; };
 		F0F104C128D3752C003F5374 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F104BF28D3752C003F5374 /* Main.storyboard */; };
-		F0F104C428D3752C003F5374 /* doDone.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F0F104C228D3752C003F5374 /* doDone.xcdatamodeld */; };
+		F0F104C428D3752C003F5374 /* doDoneDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F0F104C228D3752C003F5374 /* doDoneDataModel.xcdatamodeld */; };
 		F0F104C628D3752D003F5374 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0F104C528D3752D003F5374 /* Assets.xcassets */; };
 		F0F104C928D3752D003F5374 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0F104C728D3752D003F5374 /* LaunchScreen.storyboard */; };
-		F0F104D228D4852E003F5374 /* 40-add-card-solid.gif in Resources */ = {isa = PBXBuildFile; fileRef = F0F104D128D4852E003F5374 /* 40-add-card-solid.gif */; };
+		F0F104FB28D736C2003F5374 /* 40.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F104FA28D736C2003F5374 /* 40.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		F0F104C528D3752D003F5374 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F0F104C828D3752D003F5374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F0F104CA28D3752D003F5374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F0F104D128D4852E003F5374 /* 40-add-card-solid.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "40-add-card-solid.gif"; sourceTree = "<group>"; };
+		F0F104FA28D736C2003F5374 /* 40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 40.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,10 +65,10 @@
 				F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */,
 				F0F104BF28D3752C003F5374 /* Main.storyboard */,
 				F0F104C528D3752D003F5374 /* Assets.xcassets */,
+				F0F104D628D5E39F003F5374 /* DataModel */,
 				F0F104D028D48517003F5374 /* ButtonsIcon */,
 				F0F104C728D3752D003F5374 /* LaunchScreen.storyboard */,
 				F0F104CA28D3752D003F5374 /* Info.plist */,
-				F0F104C228D3752C003F5374 /* doDone.xcdatamodeld */,
 			);
 			path = doDone;
 			sourceTree = "<group>";
@@ -76,9 +76,17 @@
 		F0F104D028D48517003F5374 /* ButtonsIcon */ = {
 			isa = PBXGroup;
 			children = (
-				F0F104D128D4852E003F5374 /* 40-add-card-solid.gif */,
+				F0F104FA28D736C2003F5374 /* 40.png */,
 			);
 			path = ButtonsIcon;
+			sourceTree = "<group>";
+		};
+		F0F104D628D5E39F003F5374 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				F0F104C228D3752C003F5374 /* doDoneDataModel.xcdatamodeld */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,9 +147,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0F104FB28D736C2003F5374 /* 40.png in Resources */,
 				F0F104C928D3752D003F5374 /* LaunchScreen.storyboard in Resources */,
 				F0F104C628D3752D003F5374 /* Assets.xcassets in Resources */,
-				F0F104D228D4852E003F5374 /* 40-add-card-solid.gif in Resources */,
 				F0F104C128D3752C003F5374 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0F104C428D3752C003F5374 /* doDone.xcdatamodeld in Sources */,
+				F0F104C428D3752C003F5374 /* doDoneDataModel.xcdatamodeld in Sources */,
 				F0F104BE28D3752C003F5374 /* DoDoneViewController.swift in Sources */,
 				F0F104BA28D3752C003F5374 /* AppDelegate.swift in Sources */,
 				F0F104BC28D3752C003F5374 /* SceneDelegate.swift in Sources */,
@@ -376,13 +384,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F0F104C228D3752C003F5374 /* doDone.xcdatamodeld */ = {
+		F0F104C228D3752C003F5374 /* doDoneDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				F0F104C328D3752C003F5374 /* doDone.xcdatamodel */,
 			);
 			currentVersion = F0F104C328D3752C003F5374 /* doDone.xcdatamodel */;
-			path = doDone.xcdatamodeld;
+			path = doDoneDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

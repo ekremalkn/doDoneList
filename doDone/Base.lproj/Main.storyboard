@@ -32,8 +32,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="doDone" id="yf4-CJ-Jhu">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="B8k-tk-dMj">
-                            <imageReference key="image" image="plus" catalog="system" renderingMode="hierarchical-single">
+                        <barButtonItem key="rightBarButtonItem" title="Add" springLoaded="YES" style="plain" id="B8k-tk-dMj">
+                            <imageReference key="image" image="40.png" renderingMode="hierarchical-single">
                                 <hierarchicalColors>
                                     <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color systemColor="secondaryLabelColor"/>
@@ -75,7 +75,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="40.png" width="40" height="40"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

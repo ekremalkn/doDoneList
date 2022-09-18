@@ -9,28 +9,42 @@ import UIKit
 
 class DoDoneViewController: UITableViewController {
 
-    var toDoArray = ["ekrem", "fatih"]
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var toDoArray = [DoDoneList]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view.
+        
+        self.getItems()
     }
 
     
+    
+    
+    
+    
+    
+    
+    
     //MARK: - verileri satırlara ekleme
 
-    
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoArray.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoDoneItemCell", for: indexPath)
         
-        cell.textLabel?.text = toDoArray[indexPath.row]
+        let item = toDoArray[indexPath.row]
         
-          
+        cell.textLabel?.text = item.textFieldText
+        
+        cell.accessoryType = item.done ? .checkmark : .none
         
         return cell
         
@@ -39,21 +53,55 @@ class DoDoneViewController: UITableViewController {
     //MARK: - Tableview Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+
+       toDoArray[indexPath.row].done = !toDoArray[indexPath.row].done
+        
+        context.delete(toDoArray[indexPath.row])
+        
+        self.saveItems()
+        
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
+       
       
         }
     
     
-    //MARK: - Add Button
+    //MARK: - Core Data
+    
+    
+    func saveItems() {
+        do {
+            try context.save()
+        }
+        catch {
+            print("error = can not save context")
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    
+    func getItems() {
+        
+        do {
+           
+            toDoArray =  try context.fetch(DoDoneList.fetchRequest())
+            
+        }
+        catch {
+            print("error = can not load items from coredata")
+        }
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+        }
+
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
         var alertTextField = UITextField()
         
         let alert = UIAlertController(title: "Unutmamak için listeye ekle!", message: "", preferredStyle: .alert)
@@ -69,8 +117,13 @@ class DoDoneViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Ekle", style: .default, handler: {
             (action: UIAlertAction!) in
             
-            self.toDoArray.append(alertTextField.text!)
-            self.tableView.reloadData()
+            let newItem = DoDoneList(context:  self.context)
+            newItem.textFieldText = alertTextField.text!
+            newItem.done = false
+            newItem.createdTime = Date()
+            
+            self.toDoArray.append(newItem)
+            self.saveItems()
             
             
         }))
@@ -80,8 +133,14 @@ class DoDoneViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+   
     
-  
+    
+    
+    
+    
+    
+    
     
     
        
