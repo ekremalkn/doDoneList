@@ -6,6 +6,6 @@
         <attribute name="textFieldText" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DoDoneList" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="DoDoneList" positionX="171.625" positionY="13.48828125" width="128" height="88"/>
     </elements>
 </model>

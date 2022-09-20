@@ -6,29 +6,51 @@
 //
 
 import UIKit
+import CoreData
+import SwipeCellKit
 
-class DoDoneViewController: UITableViewController {
+
+class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTableViewCellDelegate {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     var toDoArray = [DoDoneList]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        // Do any additional setup after loading the view.
+        
+        tableView.rowHeight = 90
         
         self.getItems()
     }
+    
+    //MARK: - SwipeCell
 
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "İptal Et") { action, indexPath in
+            // handle action by updating model with deletion
+            self.context.delete(self.toDoArray[indexPath.row])
+            
+            self.saveItems()
+            self.getItems()
+        }
+
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "TrashIcon")
+
+        return [deleteAction]
+    }
     
-    
-    
-    
-    
-    
-    
-    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .destructiveAfterFill
+        
+        return options
+    }
+
     //MARK: - verileri satırlara ekleme
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -38,7 +60,8 @@ class DoDoneViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DoDoneItemCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DoDoneItemCell", for: indexPath) as! SwipeTableViewCell
+        cell.delegate = self
         
         let item = toDoArray[indexPath.row]
         
@@ -57,7 +80,7 @@ class DoDoneViewController: UITableViewController {
 
        toDoArray[indexPath.row].done = !toDoArray[indexPath.row].done
         
-        context.delete(toDoArray[indexPath.row])
+        
         
         self.saveItems()
         
@@ -98,6 +121,8 @@ class DoDoneViewController: UITableViewController {
         }
         
         }
+    
+    
 
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
@@ -120,7 +145,7 @@ class DoDoneViewController: UITableViewController {
             let newItem = DoDoneList(context:  self.context)
             newItem.textFieldText = alertTextField.text!
             newItem.done = false
-            newItem.createdTime = Date()
+            
             
             self.toDoArray.append(newItem)
             self.saveItems()
@@ -132,6 +157,80 @@ class DoDoneViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    
+    //MARK: - SearchBar Set Up
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let request : NSFetchRequest<DoDoneList> = DoDoneList.fetchRequest()
+        
+        let pred = NSPredicate(format: "textFieldText CONTAINS[cd] %@", searchBar.text!)
+       
+        request.predicate = pred
+        
+        
+        do {
+           
+            toDoArray =  try context.fetch(request)
+            
+        }
+        catch {
+            print("error = can not searched in coreData array")
+        }
+        
+        
+        
+        
+        tableView.reloadData()
+        
+    
+        
+        searchBar.endEditing(true)
+    }
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+    
+            let request : NSFetchRequest<DoDoneList> = DoDoneList.fetchRequest()
+            
+            do {
+               
+                toDoArray =  try context.fetch(request)
+                
+            }
+            catch {
+                print("error = can not searched in coreData array")
+            }
+            
+            tableView.reloadData()
+        }
+        
+        
+    }
+    
+    //MARK: - Dismiss Keyboard while scrolling
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        tableView.keyboardDismissMode = .onDrag
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+
     
    
     
