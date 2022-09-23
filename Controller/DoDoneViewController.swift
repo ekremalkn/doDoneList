@@ -11,18 +11,31 @@ import SwipeCellKit
 
 
 class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTableViewCellDelegate {
+  
+    
 
+    
+    
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var toDoArray = [DoDoneList]()
     
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
-        
+        tableView.separatorColor = .systemYellow
         tableView.rowHeight = 90
         
         self.getItems()
+    }
+    
+    
+    @IBAction func sortButton(_ sender: Any) {
+        self.toDoArray.sort(by: {$0.textFieldText! < $1.textFieldText!})
+        self.saveItems()
+        
     }
     
     //MARK: - SwipeCell
@@ -33,16 +46,17 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         let deleteAction = SwipeAction(style: .destructive, title: "İptal Et") { action, indexPath in
             // handle action by updating model with deletion
             self.context.delete(self.toDoArray[indexPath.row])
-            
+         
             self.saveItems()
             self.getItems()
+            
         }
 
         // customize the action appearance
         deleteAction.image = UIImage(named: "TrashIcon")
 
         return [deleteAction]
-    }
+    } 
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
         var options = SwipeOptions()
@@ -56,16 +70,26 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return toDoArray.count
     }
+   
+    
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+       
+                
         let cell = tableView.dequeueReusableCell(withIdentifier: "DoDoneItemCell", for: indexPath) as! SwipeTableViewCell
         cell.delegate = self
-        
+     
         let item = toDoArray[indexPath.row]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, h:mm a"
+        let dateString = dateFormatter.string(from: toDoArray[indexPath.row].createdTime!)
+       
+       
         
+        cell.textLabel?.adjustsFontSizeToFitWidth = true
         cell.textLabel?.text = item.textFieldText
+        cell.detailTextLabel?.text = dateString
         
         cell.accessoryType = item.done ? .checkmark : .none
         
@@ -79,6 +103,8 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         
 
        toDoArray[indexPath.row].done = !toDoArray[indexPath.row].done
+        
+       
         
         
         
@@ -101,6 +127,8 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
             print("error = can not save context")
         }
         
+        
+        
         self.tableView.reloadData()
     }
     
@@ -115,10 +143,12 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         catch {
             print("error = can not load items from coredata")
         }
+       
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        
         
         }
     
@@ -144,10 +174,13 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
             
             let newItem = DoDoneList(context:  self.context)
             newItem.textFieldText = alertTextField.text!
+            newItem.createdTime = Date()
             newItem.done = false
             
             
+            
             self.toDoArray.append(newItem)
+            
             self.saveItems()
             
             
@@ -219,33 +252,12 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     
     
     
-    
-    
-    
-    
-    
-    
-    
-   
-    
-    
-    
-
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-       
-                
+ 
     }
-    
+
+
+
+
     
 
 

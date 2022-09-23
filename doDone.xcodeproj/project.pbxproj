@@ -61,9 +61,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F0656BFF28DC6E3900315574 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F0656C0028DC6E4000315574 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F0F104BF28D3752C003F5374 /* Main.storyboard */,
+				F0F104C728D3752D003F5374 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F0656C0128DC6E4700315574 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		F0F104AD28D3752C003F5374 = {
 			isa = PBXGroup;
 			children = (
+				F0656BFF28DC6E3900315574 /* Model */,
+				F0656C0028DC6E4000315574 /* View */,
+				F0656C0128DC6E4700315574 /* Controller */,
 				F0F104B828D3752C003F5374 /* doDone */,
 				F0F104B728D3752C003F5374 /* Products */,
 				E28CB110894018C72A327901 /* Pods */,
@@ -84,11 +111,8 @@
 			children = (
 				F0F104B928D3752C003F5374 /* AppDelegate.swift */,
 				F0F104BB28D3752C003F5374 /* SceneDelegate.swift */,
-				F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */,
-				F0F104BF28D3752C003F5374 /* Main.storyboard */,
 				F0F104C528D3752D003F5374 /* Assets.xcassets */,
 				F0F104D628D5E39F003F5374 /* DataModel */,
-				F0F104C728D3752D003F5374 /* LaunchScreen.storyboard */,
 				F0F104CA28D3752D003F5374 /* Info.plist */,
 			);
 			path = doDone;
