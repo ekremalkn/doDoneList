@@ -29,7 +29,12 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         tableView.rowHeight = 90
         
         self.getItems()
+        
     }
+    
+    
+    //MARK: - buttons
+
     
     
     @IBAction func sortButton(_ sender: Any) {
@@ -91,7 +96,7 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         cell.textLabel?.text = item.textFieldText
         cell.detailTextLabel?.text = dateString
         
-        cell.accessoryType = item.done ? .checkmark : .none
+        
         
         return cell
         
@@ -104,7 +109,14 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
 
        toDoArray[indexPath.row].done = !toDoArray[indexPath.row].done
         
-       
+        let vc = storyboard?.instantiateViewController(withIdentifier: "secondVC") as! DetailViewController
+        
+        vc.baslik = toDoArray[indexPath.row].textFieldText!
+        vc.detail = toDoArray[indexPath.row].textFieldDetailText!
+        present(vc, animated: true)
+        
+        
+        
         
         
         
@@ -158,12 +170,20 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var alertTextField = UITextField()
+        var alertTextFieldDetail = UITextField()
         
         let alert = UIAlertController(title: "Unutmamak için listeye ekle!", message: "", preferredStyle: .alert)
        
         alert.addTextField { (textField) in
-            textField.placeholder = "örn: Alışveriş"
+            textField.placeholder = "örn: Pazar Alışverişi"
             alertTextField = textField
+            
+            
+           }
+        
+        alert.addTextField(){ (textField) in
+            textField.placeholder = "örn: Elma 2kg"
+            alertTextFieldDetail = textField
             
             
            }
@@ -174,6 +194,7 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
             
             let newItem = DoDoneList(context:  self.context)
             newItem.textFieldText = alertTextField.text!
+            newItem.textFieldDetailText = alertTextFieldDetail.text!
             newItem.createdTime = Date()
             newItem.done = false
             

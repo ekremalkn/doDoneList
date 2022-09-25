@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		37A7A77B65BE7D63E6B4CAA0 /* Pods_doDone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4CF305DD704CECC30B51045 /* Pods_doDone.framework */; };
+		F0656C0728DF0FD200315574 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0656C0628DF0FD200315574 /* DetailViewController.swift */; };
 		F0F104BA28D3752C003F5374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F104B928D3752C003F5374 /* AppDelegate.swift */; };
 		F0F104BC28D3752C003F5374 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F104BB28D3752C003F5374 /* SceneDelegate.swift */; };
 		F0F104BE28D3752C003F5374 /* DoDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */; };
@@ -21,6 +22,7 @@
 		3E43A934E31BA216F3C921DF /* Pods-doDone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doDone.release.xcconfig"; path = "Target Support Files/Pods-doDone/Pods-doDone.release.xcconfig"; sourceTree = "<group>"; };
 		77D4A4B0E4829642EF83E2B7 /* Pods-doDone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-doDone.debug.xcconfig"; path = "Target Support Files/Pods-doDone/Pods-doDone.debug.xcconfig"; sourceTree = "<group>"; };
 		B4CF305DD704CECC30B51045 /* Pods_doDone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_doDone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0656C0628DF0FD200315574 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = Controller/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		F0F104B628D3752C003F5374 /* doDone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = doDone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0F104B928D3752C003F5374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0F104BB28D3752C003F5374 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				F0F104BD28D3752C003F5374 /* DoDoneViewController.swift */,
+				F0656C0628DF0FD200315574 /* DetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				F0F104C428D3752C003F5374 /* doDoneDataModel.xcdatamodeld in Sources */,
 				F0F104BE28D3752C003F5374 /* DoDoneViewController.swift in Sources */,
 				F0F104BA28D3752C003F5374 /* AppDelegate.swift in Sources */,
+				F0656C0728DF0FD200315574 /* DetailViewController.swift in Sources */,
 				F0F104BC28D3752C003F5374 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

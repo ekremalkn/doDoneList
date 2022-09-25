@@ -3,9 +3,10 @@
     <entity name="DoDoneList" representedClassName=".DoDoneList" syncable="YES" codeGenerationType="class">
         <attribute name="createdTime" attributeType="Date" defaultDateTimeInterval="685622700" usesScalarValueType="NO"/>
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="textFieldDetailText" attributeType="String"/>
         <attribute name="textFieldText" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DoDoneList" positionX="171.625" positionY="13.48828125" width="128" height="74"/>
+        <element name="DoDoneList" positionX="171.625" positionY="13.48828125" width="128" height="89"/>
     </elements>
 </model>
