@@ -10,7 +10,7 @@ import CoreData
 import SwipeCellKit
 
 
-class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTableViewCellDelegate {
+class DoDoneViewController: UITableViewController, UISearchBarDelegate,  SwipeTableViewCellDelegate {
   
     
 
@@ -25,6 +25,7 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         tableView.separatorColor = .systemYellow
         tableView.rowHeight = 90
         
@@ -104,6 +105,8 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     
     //MARK: - Tableview Delegate Methods
     
+   
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
@@ -145,11 +148,11 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
     }
     
     
-    func getItems() {
+    func getItems(with request: NSFetchRequest<DoDoneList> = DoDoneList.fetchRequest(), predicate: NSPredicate? = nil) {
         
         do {
            
-            toDoArray =  try context.fetch(DoDoneList.fetchRequest())
+            toDoArray =  try context.fetch(request)
             
         }
         catch {
@@ -243,26 +246,43 @@ class DoDoneViewController: UITableViewController , UISearchBarDelegate, SwipeTa
         searchBar.endEditing(true)
     }
     
-    
+   
+   
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-    
-            let request : NSFetchRequest<DoDoneList> = DoDoneList.fetchRequest()
+      
+        
+        
+        if searchBar.text?.count == 0 {
+            getItems()
+        
+           
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+        }
+            else  {
+              let request : NSFetchRequest<DoDoneList> = DoDoneList.fetchRequest()
+              let pred = NSPredicate(format: "textFieldText CONTAINS[cd] %@", searchBar.text!)
+                request.predicate = pred
+              
+                request.sortDescriptors = [NSSortDescriptor(key: "textFieldText", ascending: true)]
+                
+              
+                self.getItems(with: request, predicate: pred)
+              
             
-            do {
-               
-                toDoArray =  try context.fetch(request)
+              
                 
             }
-            catch {
-                print("error = can not searched in coreData array")
-            }
             
-            tableView.reloadData()
+            
+            
         }
         
         
-    }
+        
+        
+ 
     
     //MARK: - Dismiss Keyboard while scrolling
 
